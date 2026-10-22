@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hajchy – telefon</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1c2026;--bg2:#252a32;--ink:#f1efe9;--muted:#a3abb7;--card:#f4f2ec;--card-ink:#20242a;--card-muted:#566070;--yellow:#e6e3da;--pink:#59616d;--cyan:#8a93a0;--tape:rgba(230,227,218,.5);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e4e7ec;--bg2:#d5dae2;--ink:#1c2026;--muted:#4b5563;--card:#fff;--yellow:#2b3038;--pink:#a3abb7;--cyan:#6b7480;--tape:rgba(110,118,130,.35)}}
+:root[data-theme="dark"]{--bg:#1c2026}
+*{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:400 17px/1.6 "Bricolage Grotesque",system-ui,sans-serif;background-color:var(--bg);
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+main{max-width:980px;margin:0 auto;padding:0 20px 72px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;margin:0}
+
+.hero{padding:56px 0 40px;position:relative;text-align:center}
+h1{font-size:clamp(64px,22vw,190px);line-height:.88;letter-spacing:-.035em;transform:rotate(0deg);transform-origin:center bottom;
+color:var(--yellow);text-shadow:4px 4px 0 var(--pink),8px 8px 0 rgba(0,0,0,.35)}
+.sticker{display:inline-block;margin:8px 0 0;padding:5px 12px;background:var(--ink);color:var(--bg);
+font:800 16px "Bricolage Grotesque",system-ui,sans-serif;transform:rotate(0deg);border-radius:6px;box-shadow:4px 4px 0 var(--cyan)}
+
+h2{font-size:clamp(30px,6vw,42px);margin:64px 0 24px;display:inline-block;position:relative}
+h2::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-4px;height:8px;background:var(--pink);z-index:-1;transform:rotate(0deg);border-radius:4px}
+
+.about{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:0;padding:0;list-style:none}
+.about li{background:var(--bg2);border-radius:14px;padding:18px 20px;border-top:5px solid var(--yellow)}
+.about li:nth-child(2){border-top-color:var(--pink)}
+.about li:nth-child(3){border-top-color:var(--cyan)}
+.about li:nth-child(4){border-top-color:var(--ink)}
+.about b{display:block;font-weight:600;margin-bottom:2px}
+.about span{color:var(--muted);font-size:15px}
+
+.wall{display:grid;gap:36px 28px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));padding:14px 6px}
+.pol{background:var(--card);color:var(--card-ink);padding:12px 12px 20px;box-shadow:0 10px 24px rgba(0,0,0,.4);position:relative;
+transform:rotate(var(--r,0deg));transition:transform .2s ease,box-shadow .2s ease;border-radius:3px}
+.pol:nth-child(odd){--r:0deg}.pol:nth-child(even){--r:0deg}.pol:nth-child(3n){--r:0deg}
+.pol:hover{transform:rotate(0deg) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.5)}
+.pol::before{content:"";position:absolute;top:-13px;left:50%;width:80px;height:26px;margin-left:-40px;background:var(--tape);transform:rotate(0deg)}
+.photo{aspect-ratio:1;display:grid;place-items:center;font:800 64px "Bricolage Grotesque",system-ui,sans-serif;color:#fff;overflow:hidden;
+background:linear-gradient(135deg,var(--c1,#8b93a0),var(--c2,#6f7885))}
+.pol:nth-child(1) .photo{--c1:#8b93a0;--c2:#6f7885}
+.pol:nth-child(2) .photo{--c1:#7d8693;--c2:#626b78}
+.pol:nth-child(3) .photo{--c1:#99a1ad;--c2:#7a8390}
+.pol:nth-child(4) .photo{--c1:#727b88;--c2:#586170}
+.photo img{width:100%;height:100%;object-fit:cover}
+.pol h3{font-size:26px;margin:16px 0 4px}
+.pol p{margin:0;font-size:15px;line-height:1.45;color:var(--card-muted)}
+.tag{display:inline-block;margin-top:10px;padding:3px 12px;background:var(--yellow);color:#20242a;font-size:13px;font-weight:600;border-radius:99px}
+
+.strip{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.strip div{aspect-ratio:4/3;border:2px dashed var(--muted);border-radius:10px;display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:8px}
+
+.gallery{display:grid;gap:clamp(20px,4.5vw,34px) clamp(14px,3.5vw,28px);grid-template-columns:repeat(3,1fr);margin:0;padding:6px}
+.slot{background:var(--card);padding:clamp(6px,1.6vw,10px) clamp(6px,1.6vw,10px) clamp(30px,6.5vw,40px);box-shadow:0 10px 24px rgba(0,0,0,.4);position:relative;transform:rotate(var(--r,0deg));transition:transform .2s ease,box-shadow .2s ease;border-radius:3px}
+.slot:nth-child(odd){--r:0deg}.slot:nth-child(even){--r:0deg}.slot:nth-child(3n){--r:0deg}
+.slot:hover{transform:rotate(0deg) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.5)}
+.slot::before{content:"";position:absolute;top:-13px;left:50%;width:80px;height:26px;margin-left:-40px;background:var(--tape);transform:rotate(0deg)}
+.slot span{aspect-ratio:1;display:grid;place-items:center;font:800 clamp(13px,3.4vw,22px) "Bricolage Grotesque",system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,var(--c1,#8b93a0),var(--c2,#6f7885))}
+.slot:nth-child(4n+2) span{--c1:#848d9a;--c2:#69727f}
+.slot:nth-child(4n+3) span{--c1:#8b93a0;--c2:#6f7885}
+.slot:nth-child(4n) span{--c1:#7d8693;--c2:#626b78}
+.slot img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.ov{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));background:rgba(12,14,18,.82);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s ease;overflow-y:auto}
+.ov[hidden]{display:none}
+.ov.on{opacity:1}
+.stage{display:flex;align-items:center;gap:clamp(24px,5vw,56px);max-width:860px;width:100%;margin:auto auto 0;justify-content:center}
+.slot.big{width:min(340px,100%);padding:12px 12px 52px;flex:0 0 auto;transition:none;cursor:default;--r:0deg;transform:rotate(0deg)}
+.slot.big:hover{transform:rotate(0deg);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.slot .cap{position:absolute;left:0;right:0;bottom:clamp(6px,1.6vw,10px);text-align:center;font:800 clamp(12px,3.3vw,19px) "Bricolage Grotesque",system-ui,sans-serif;color:var(--card-ink)}.slot.big .cap{font-size:26px;bottom:12px}
+.info{flex:1 1 280px;min-width:0;color:var(--ink)}
+.info h3{font-size:clamp(34px,6vw,52px);line-height:1;color:var(--yellow);text-shadow:3px 3px 0 var(--pink)}
+.info .tag{display:inline-block;margin:14px 0 12px;padding:3px 12px;background:var(--yellow);color:#20242a;font-size:13px;font-weight:600;border-radius:99px}
+.info p{margin:0 0 16px;color:var(--muted)}
+.info dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.info dt{font-weight:600}
+.info dd{margin:0;color:var(--muted)}
+.more{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,2vw,24px);width:100%;max-width:1040px;margin:30px auto auto}@media all{.more{grid-template-columns:repeat(3,1fr)}}
+.thumb{background:var(--card);padding:8px 8px 26px;box-shadow:0 6px 14px rgba(0,0,0,.4);border-radius:2px;transform:rotate(var(--r,0deg))}
+.thumb:nth-child(odd){--r:0deg}.thumb:nth-child(even){--r:0deg}.thumb:nth-child(3){--r:0deg}
+.thumb span{aspect-ratio:1;display:grid;place-items:center;font:800 clamp(14px,3.2vw,24px) "Bricolage Grotesque",system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,var(--c1,#8b93a0),var(--c2,#6f7885))}
+.thumb:nth-child(2) span{--c1:#99a1ad;--c2:#7a8390}
+.thumb:nth-child(3) span{--c1:#727b88;--c2:#586170}
+.thumb:nth-child(4) span{--c1:#848d9a;--c2:#69727f}
+.thumb:nth-child(5) span{--c1:#8b93a0;--c2:#6f7885}
+.thumb img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.thumb{cursor:pointer}
+.lb{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));background:rgba(8,10,14,.9);opacity:0;transition:opacity .3s ease;cursor:pointer}
+.lb[hidden]{display:none}
+.lb.on{opacity:1}
+.lbc{width:min(600px,100%);background:var(--card);padding:12px 12px 40px;box-shadow:0 20px 50px rgba(0,0,0,.6);border-radius:3px;transform:rotate(0deg)}
+.lbc span{aspect-ratio:1;display:grid;place-items:center;font:800 48px "Bricolage Grotesque",system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,#8b93a0,#6f7885)}
+.lbc img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.cats{width:100%;max-width:none;margin:28px 0 0}
+.cat{border-bottom:2px solid var(--muted)}
+.cat-h{display:flex;align-items:center;width:100%;padding:16px 4px;background:none;border:0;color:var(--ink);font:800 clamp(30px,6vw,42px)/1.1 "Bricolage Grotesque",system-ui,sans-serif;text-align:left;cursor:pointer}
+.cat-h::after{content:"";margin-left:auto;width:12px;height:12px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg) translate(-3px,-3px);transition:transform .3s ease}
+.cat.open>.cat-h::after{transform:rotate(-135deg) translate(-3px,-3px)}
+.cat-h:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.cat-body{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1),visibility 0s .45s}
+.cat.open>.cat-body{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.cat-in{min-height:0;overflow:hidden;padding:0 8px}
+.cat.open>.cat-body>.cat-in{padding:22px 8px 30px}
+.events{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,3.5vw,26px);padding:6px}
+@media (prefers-reduced-motion:reduce){.cat-body,.cat-h::after,.cat-h::before{transition:none}}
+.cat-in.subs{padding:0 0 0 14px}
+.cat.open>.cat-body>.cat-in.subs{padding:2px 0 14px 14px}
+.cat.sub{border-bottom:1px solid var(--bg2)}
+.cat.sub:last-child{border-bottom:0}
+.sub .cat-h{font-size:clamp(20px,4.6vw,26px);padding:12px 4px;font-weight:600}
+.sub .cat-h::after{width:9px;height:9px;border-width:2px}
+.sub2 .cat-h{font-size:clamp(17px,4vw,21px);padding:10px 4px;font-weight:600}
+.sub2 .cat-h::after{width:8px;height:8px}
+.empty{margin:0;color:var(--muted);font-size:15px}
+.x{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border:0;border-radius:50%;background:var(--ink);color:var(--bg);font:800 22px/1 "Bricolage Grotesque",system-ui,sans-serif;cursor:pointer}
+.slot{cursor:pointer}
+@media all{.stage{gap:14px;align-items:center}.slot.big{width:44%;padding:8px 8px 38px}.slot.big .cap{font-size:16px;bottom:8px}.info{flex:1 1 0}.info h3{font-size:28px}.info .tag{margin:10px 0 8px}.info p{font-size:14px;line-height:1.45;margin-bottom:12px}.info dl{font-size:14px;gap:6px 10px}.slot::before{width:56px;height:20px;margin-left:-28px;top:-10px}}
+footer{margin-top:72px;padding-top:20px;border-top:2px dashed var(--muted);color:var(--muted);font-size:15px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer b{font:800 18px "Bricolage Grotesque",system-ui,sans-serif;color:var(--yellow);font-weight:400}
+
+@media (prefers-reduced-motion:no-preference){h1{animation:drop .6s cubic-bezier(.2,.9,.3,1.2)}.sticker{animation:pop .4s .45s backwards}}
+@keyframes drop{from{opacity:0;transform:rotate(0deg) translateY(-40px)}}
+@keyframes pop{from{opacity:0;transform:rotate(0deg) scale(.6)}}
+a:focus-visible,.pol:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+main{max-width:520px;padding:0 14px 72px}
+.hero{padding:36px 0 28px}
+h1{font-size:clamp(56px,20vw,112px)}
+.sticker{font-size:19px;padding:7px 16px}
+.cats{max-width:none}
+.cat-h{min-height:58px}
+.slot:hover{transform:rotate(0deg);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.x{width:48px;height:48px}
+body{-webkit-tap-highlight-color:transparent}
+.slot,.thumb,.cat-h{touch-action:manipulation}
+.lb .lbc img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 100px);aspect-ratio:auto;object-fit:contain}#c1 > .cat-h,#c2 > .cat-h{justify-content:center;text-align:center;position:relative}#c1 > .cat-h::after,#c2 > .cat-h::after{position:absolute;right:12px;margin-left:0}#c1 > .cat-h::before,#c2 > .cat-h::before{content:"";position:absolute;left:12px;width:12px;height:12px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg) translate(-3px,-3px);transition:transform .3s ease}#c1.open > .cat-h::before,#c2.open > .cat-h::before{transform:rotate(-135deg) translate(-3px,-3px)}.hero .sticker{font-size:14px;padding:4px 10px;margin-top:14px}#c2 > .cat-body > .cat-in.subs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:8px;padding-left:0}#c2 > .cat-body > .cat-in.subs > #s7:not(.open){grid-column:2}#c2 > .cat-body > .cat-in.subs > .cat.sub{display:block;width:100%;border-bottom:0}#c2 > .cat-body > .cat-in.subs > .cat.sub.open{grid-column:1/-1;padding:14px;background:var(--bg2);border:1px solid rgba(163,171,183,.28);border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.18);transition:background .25s,border-color .25s,box-shadow .25s,padding .25s}#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h{transition:background .2s,border-color .2s,color .2s,transform .2s}#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h:hover{background:rgba(138,147,160,.18);border-color:var(--cyan);transform:translateY(-1px)}#c2 > .cat-body > .cat-in.subs > .cat.sub.open > .cat-h{background:var(--cyan);color:var(--card-ink);border-color:var(--cyan)}#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-body > .cat-in.subs{padding:12px 0 0}#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h{display:block;box-sizing:border-box;width:100%;min-height:44px;padding:8px 10px;font-size:18px;line-height:1.2;text-align:center;white-space:normal;border:1px solid var(--muted);border-radius:999px}#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h::after{display:none}#c2 > .cat-body > .cat-in.subs > .cat.sub.open > .cat-body{width:100%}.slot.big.city-card .city-cover{aspect-ratio:1;display:grid;place-items:center;padding:18px;background:linear-gradient(135deg,var(--bg2),var(--cyan));color:var(--ink);font:800 clamp(28px,6vw,42px)/1.1 "Bricolage Grotesque",system-ui,sans-serif;text-align:center;border-radius:2px}.info.city-info dl{display:none}.more.city-more{display:block;width:100%;max-width:860px;max-height:min(42vh,420px);overflow:auto;margin:20px auto auto;padding:8px}.more.city-more>.cat-in.subs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:0;min-height:auto;overflow:visible}.more.city-more .cat.sub.sub2{border:0;background:var(--bg2);border-radius:14px;padding:8px 12px}.more.city-more .cat-h{width:100%;padding:9px 4px;font-size:20px;text-align:left}.more.city-more .cat.open>.cat-body>.cat-in{padding:8px 4px 12px}.more.city-more .events{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:4px}.more.city-more .thumb{padding:5px 5px 14px}.more.city-more .thumb img,.more.city-more .thumb span{aspect-ratio:1}.ov{justify-content:safe center}.stage,.more{flex-shrink:0}.thumb,.lb{cursor:url("img/asset-001.svg") 16 16,pointer}.slot.big.city-card{background:var(--bg2);color:var(--ink);border:2px dashed var(--cyan);border-radius:18px;padding:14px 14px 50px;box-shadow:0 18px 38px rgba(0,0,0,.38)}.slot.big.city-card::before{display:none}.slot.big.city-card .city-cover{border:2px solid rgba(241,239,233,.42);border-radius:12px;box-shadow:inset 0 0 0 6px rgba(138,147,160,.15)}.slot.big.city-card .cap{color:var(--ink);font-size:14px;letter-spacing:.16em;text-transform:uppercase}.info.city-info .tag,.slot.big.city-card .cap{display:none}.slot.big.city-card .city-cover::before{content:"";width:54px;height:54px;border:5px solid rgba(241,239,233,.72);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:inset 0 0 0 12px rgba(138,147,160,.18)}.slot.big.city-card .city-cover{box-sizing:border-box;padding:0;overflow:hidden;background:#d6f3e5;border:0!important;border-radius:10px!important;box-shadow:none!important}.slot.big.city-card .city-cover::before{display:none}.slot.big.city-card .city-cover img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:contain;object-position:center;background:#d6f3e5}.slot.big.city-card{background:var(--bg2);border:1px solid rgba(241,239,233,.2);border-radius:20px;padding:12px 12px 50px;box-shadow:0 18px 38px rgba(0,0,0,.32)}.slot.big.city-card .city-cover{box-sizing:border-box;display:block;width:100%;aspect-ratio:4/3;padding:0;overflow:hidden;background:transparent;border:0!important;border-radius:12px!important;box-shadow:none!important}.slot.big.city-card .city-cover::before{display:none}.slot.big.city-card .city-cover img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;background:transparent;image-rendering:auto}.slot.big.city-card .cap{display:none}.more.city-more{max-width:1100px;max-height:min(62vh,680px);margin:16px auto auto;padding:10px 8px}
+.more.city-more>.cat-in.subs{grid-template-columns:minmax(0,1fr);gap:10px}
+.more.city-more .events{grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:8px}
+.more.city-more .thumb{padding:4px 4px 12px}
+.more.city-more .thumb img,.more.city-more .thumb span{aspect-ratio:4/3}
+@media(max-width:950px){.more.city-more .events{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:620px){.more.city-more .events{grid-template-columns:repeat(2,minmax(0,1fr))}}.lbc{display:grid;place-items:center;width:fit-content;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);box-sizing:border-box;padding:10px;background:var(--card);border-radius:12px;overflow:hidden}.lb .lbc img{display:block;width:auto!important;height:auto!important;max-width:calc(100vw - 52px)!important;max-height:calc(100vh - 52px)!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;margin:auto}/* Fix: collapsed accordions must not reserve space; keep event locations in one vertical list. */
+.cat-body{display:none;grid-template-rows:none;visibility:hidden;transition:none}
+.cat.open>.cat-body{display:block;visibility:visible}
+#c2 > .cat-body > .cat-in.subs{display:block;grid-template-columns:none;gap:0;padding-left:14px}
+#c2 > .cat-body > .cat-in.subs > .cat.sub{display:block;width:100%;grid-column:auto;padding:0;border:0;border-bottom:1px solid var(--bg2);border-radius:0;box-shadow:none;background:transparent}
+#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h{display:flex;width:100%;min-height:58px;padding:12px 4px;text-align:left;white-space:normal;border:0;border-radius:0;font-size:clamp(20px,4.6vw,26px)}
+#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h::after{display:block}
+#c2 > .cat-body > .cat-in.subs > .cat.sub.open > .cat-h{background:none;color:var(--ink);border-color:transparent}
+#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-body > .cat-in.subs{padding:2px 0 14px 14px}/* Align every city row with the Studená row. */
+#c2 > .cat-body > .cat-in.subs{padding-left:0!important}
+#c2 > .cat-body > .cat-in.subs > .cat.sub > .cat-h{padding-left:18px!important}</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<h1>Hajchy</h1>
+<span class="sticker">represent</span>
+</header>
+
+<div class="cats">
+<div class="cat" id="c1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="c1b">dezoláti</button><div class="cat-body" id="c1b"><div class="cat-in"><section class="gallery"><div class="slot" role="button" tabindex="0" data-i="0"><img src="img/asset-002.webp" alt="Vojta"><b class="cap">Vojta</b></div><div class="slot" role="button" tabindex="0" data-i="1"><img src="img/asset-003.webp" alt="Michal"><b class="cap">Michal</b></div><div class="slot" role="button" tabindex="0" data-i="2"><img src="img/asset-004.webp" alt="Martin"><b class="cap">Martin</b></div><div class="slot" role="button" tabindex="0" data-i="3"><img src="img/asset-005.webp" alt="Richard"><b class="cap">Richard</b></div><div class="slot" role="button" tabindex="0" data-i="4"><img src="img/asset-006.webp" alt="Jakub"><b class="cap">Jakub</b></div><div class="slot" role="button" tabindex="0" data-i="5"><img src="img/asset-007.webp" alt="Mates"><b class="cap">Mates</b></div><div class="slot" role="button" tabindex="0" data-i="6"><img src="img/asset-008.webp" alt="Matěj"><b class="cap">Matěj</b></div><div class="slot" role="button" tabindex="0" data-i="7"><img src="img/asset-009.webp" alt="Jaroslav"><b class="cap">Jaroslav</b></div><div class="slot" role="button" tabindex="0" data-i="8"><img src="img/asset-010.webp" alt="Adam"><b class="cap">Adam</b></div><div class="slot" role="button" tabindex="0" data-i="9"><img src="img/asset-011.webp" alt="Kuba"><b class="cap">Kuba</b></div><div class="slot" role="button" tabindex="0" data-i="10"><img src="img/asset-012.webp" alt="Adam"><b class="cap">Adam</b></div><div class="slot" role="button" tabindex="0" data-i="11"><img src="img/asset-013.webp" alt="Adam"><b class="cap">Adam</b></div><div class="slot" role="button" tabindex="0" data-i="12"><img src="img/asset-014.webp" alt="Petr"><b class="cap">Petr</b></div></section></div></div></div>
+<div class="cat" id="c2"><button class="cat-h" type="button" aria-expanded="false" aria-controls="c2b">akce</button><div class="cat-body" id="c2b"><div class="cat-in subs"><div class="cat sub" id="s1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s1b">Studená</button><div class="cat-body" id="s1b"><div class="cat-in subs"><div class="cat sub sub2" id="s1-2"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s1-2b">2023</button><div class="cat-body" id="s1-2b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 1" src="img/asset-015.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 2" src="img/asset-016.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 3" src="img/asset-017.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 4" src="img/asset-018.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 5" src="img/asset-019.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 6" src="img/asset-020.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 7" src="img/asset-021.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 8" src="img/asset-022.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 9" src="img/asset-023.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 10" src="img/asset-024.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 11" src="img/asset-025.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 12" src="img/asset-026.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 13" src="img/asset-027.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 14" src="img/asset-028.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 15" src="img/asset-029.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 16" src="img/asset-030.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 17" src="img/asset-031.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 18" src="img/asset-032.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 19" src="img/asset-033.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 20" src="img/asset-034.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 21" src="img/asset-035.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 22" src="img/asset-036.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 23" src="img/asset-037.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 24" src="img/asset-038.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 25" src="img/asset-039.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 26" src="img/asset-040.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 27" src="img/asset-040.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 28" src="img/asset-041.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 29" src="img/asset-035.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 30" src="img/asset-042.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 31" src="img/asset-043.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 32" src="img/asset-044.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 33" src="img/asset-045.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 34" src="img/asset-046.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 35" src="img/asset-047.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 36" src="img/asset-048.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 37" src="img/asset-049.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 38" src="img/asset-050.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 39" src="img/asset-051.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 40" src="img/asset-052.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 41" src="img/asset-053.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 42" src="img/asset-054.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 43" src="img/asset-055.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 44" src="img/asset-056.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 45" src="img/asset-057.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 46" src="img/asset-058.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená 2023 – foto 47" src="img/asset-059.webp"></div></div></div></div></div></div><div class="cat sub sub2" id="s1-4"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s1-4b">Silvestr2023</button><div class="cat-body" id="s1-4b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená Silvestr2023 – foto 1" src="img/asset-060.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><img alt="Studená Silvestr2023 – foto 2" src="img/asset-061.webp"></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div><div class="cat sub sub2" id="s1-3"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s1-3b">2024</button><div class="cat-body" id="s1-3b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div><div class="cat sub sub2" id="s1-5"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s1-5b">Silvestr2024</button><div class="cat-body" id="s1-5b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div></div></div><div class="cat sub" id="s2"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s2b">Teplice</button><div class="cat-body" id="s2b"><div class="cat-in subs"><div class="cat sub sub2" id="s2-1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s2-1b">Maturák</button><div class="cat-body" id="s2-1b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div></div></div></div><div class="cat sub" id="s3"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s3b">Kaplice</button><div class="cat-body" id="s3b"><div class="cat-in subs"><div class="cat sub sub2" id="s3-1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s3-1b">2024</button><div class="cat-body" id="s3-1b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div></div></div></div><div class="cat sub" id="s4"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s4b">Havlíčkův Brod</button><div class="cat-body" id="s4b"><div class="cat-in subs"><div class="cat sub sub2" id="s4-1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s4-1b">Narozky</button><div class="cat-body" id="s4-1b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div><div class="cat sub sub2" id="s4-2"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s4-2b">Silvestr2025</button><div class="cat-body" id="s4-2b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div></div></div></div><div class="cat sub" id="s5"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s5b">Ostrava</button><div class="cat-body" id="s5b"><div class="cat-in subs"><div class="cat sub sub2" id="s5-1"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s5-1b">2026</button><div class="cat-body" id="s5-1b"><div class="cat-in"><div class="events"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div></div></div></div></div></div></div><div class="cat sub" id="s6"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s6b">Troubky</button><div class="cat-body" id="s6b"><div class="cat-in"><p class="empty">Zatím tu nic není.</p></div></div></div><div class="cat sub" id="s7"><button class="cat-h" type="button" aria-expanded="false" aria-controls="s7b">Zlín</button><div class="cat-body" id="s7b"><div class="cat-in"><p class="empty">Zatím tu nic není.</p></div></div></div></div></div></div></div>
+</div>
+</main>
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-label="Detail člověka">
+<button class="x" id="x" aria-label="Zavřít">X</button>
+<div class="stage"><div class="slot big" id="card"></div>
+<div class="info" id="info"><h3 id="n"></h3><span class="tag" id="r"></span><p id="b"></p>
+</div></div>
+<div class="more" id="more"><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div><div class="thumb" role="button" tabindex="0" aria-label="Zvětšit fotku"><span>foto</span></div></div>
+</div>
+<div class="lb" id="lb" hidden aria-label="Zvětšená fotka"><div class="lbc" id="lbc"></div></div>
+<template id="photo-extra-2"><img alt="" src="img/asset-062.webp"></template><template id="photo-extra-7"><img alt="" src="img/asset-063.webp"><img alt="" src="img/asset-064.webp"></template><template id="photo-extra-9"><img alt="" src="img/asset-065.webp"><img alt="" src="img/asset-066.webp"><img alt="" src="img/asset-067.webp"><img alt="" src="img/asset-068.webp"></template><template id="photo-extra-12"><img alt="" src="img/asset-069.webp"><img alt="" src="img/asset-070.webp"><img alt="" src="img/asset-071.webp"></template><template id="photo-extra-10"><img alt="" src="img/asset-072.webp"></template><template id="photo-extra-11"><img alt="" src="img/asset-073.webp"></template><template id="photo-extra-6"><img alt="" src="img/asset-074.webp"></template><script>
+const NAMES=["Vojta","Michal","Martin","Richard","Jakub","Mates","Matěj","Jaroslav","Adam","Kuba","Adam","Adam","Petr"];
+const NICKS=["v0jtiik","jarda","sratof","oregáno","rudy","mánes","langer","dizzy","blade","jackob","nerwyx","fkken","zahry"];
+
+
+const CITIES=["Troubky","Kaplice","Praha","Zlín","Teplice","Kaplice","Hradec Králové","Ústí nad Labem","Ostrava","Havlíčkův Brod","Plzeň","Ostrava","Most"];
+const PHOTOS={"2":["img/asset-075.webp"],"7":["img/asset-076.webp","img/asset-077.webp"],"0": ["img/asset-078.webp", "img/asset-079.webp", "img/asset-080.webp", "img/asset-081.webp", "img/asset-082.webp"], "1": ["img/asset-083.webp", "img/asset-084.webp", "img/asset-085.webp", "img/asset-086.webp", "img/asset-087.webp"], "3": ["img/asset-088.webp", "img/asset-089.webp", "img/asset-090.webp", "img/asset-091.webp", "img/asset-092.webp"], "4": ["img/asset-093.webp", "img/asset-094.webp", "img/asset-095.webp", "img/asset-096.webp", "img/asset-097.webp"], "5": ["img/asset-098.webp", "img/asset-099.webp", "img/asset-100.webp", "img/asset-101.webp", "img/asset-102.webp"],"8": ["img/asset-103.webp", "img/asset-104.webp", "img/asset-105.webp", "img/asset-106.webp", "img/asset-107.webp"]};
+
+const BIOS=["Tlustej plešatej zmrd","Neandrtálec bez internetu","Pražskej kokot","Feťák první třídy","Certified Teplicky kar","Kuchar, co neumí vařit","Fotbal konina s motorkou","bejvalej feťák a dealer","Fizl bez řidičáku","Čelo jak dálnice","Prvotřídní pohádkář","Spí za jízdy","Miluje autobusy"];
+const people=Array.from({length:13},(_,i)=>({name:NAMES[i]||"Jméno "+(i+1),bio:BIOS[i],nick:NICKS[i],likes:"doplnit",since:"doplnit"}));
+const $=id=>document.getElementById(id);
+const ov=$("ov"),card=$("card"),info=$("info"),more=$("more");
+const calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const T=calm?0:480,EASE="cubic-bezier(.2,.8,.2,1)";
+let cur=null,busy=false;
+function from(slot){
+  const a=slot.getBoundingClientRect(),b=card.getBoundingClientRect();
+  return "translate("+(a.left+a.width/2-b.left-b.width/2)+"px,"+(a.top+a.height/2-b.top-b.height/2)+"px) scale("+(a.width/b.width)+") rotate(0deg)";
+}
+function extraPhotos(index){const t=$("photo-extra-"+index);return t?Array.from(t.content.querySelectorAll("img"),im=>im.getAttribute("src")):[];}function openIt(slot){
+  if(busy)return;cur=slot;card.classList.remove("city-card");info.classList.remove("city-info");more.classList.remove("city-more");ov.setAttribute("aria-label","Detail člověka");
+  [card,info,more].forEach(e=>e.getAnimations().forEach(a=>a.cancel()));
+  const p=people[+slot.dataset.i];
+  card.innerHTML=slot.innerHTML;
+  card.querySelector(".cap").textContent=p.name;
+  const sp=slot.querySelector("span"),cs=card.querySelector("span");
+  if(sp&&cs)cs.style.backgroundImage=getComputedStyle(sp).backgroundImage;
+  $("n").textContent=p.nick||p.name;$("r").textContent=CITIES[slot.dataset.i]||"doplnit město";$("b").textContent=p.bio;
+  
+  const ex=[...(PHOTOS[slot.dataset.i]||[]),...extraPhotos(slot.dataset.i)];
+  more.innerHTML="";
+  for(let j=0;j<Math.max(5,ex.length);j++){
+    const t=document.createElement("div");t.className="thumb";t.setAttribute("role","button");t.tabIndex=0;t.setAttribute("aria-label","Zvětšit fotku");
+    if(ex[j]){const im=document.createElement("img");im.src=ex[j];im.alt=p.name;if(+slot.dataset.i===8){const facePositions=["50% 42%","50% 37%","50% 35%","52% 36%","50% 40%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===2){const facePositions=["50% 50%","50% 25%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===7){const facePositions=["50% 50%","50% 36%","55% 40%","50% 35%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===9){const facePositions=["50% 42%","50% 40%","70% 0%","48% 42%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===12){const facePositions=["50% 45%","70% 35%","50% 42%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===10){const facePositions=["50% 43%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===11){const facePositions=["50% 40%"];im.style.objectPosition=facePositions[j]||"50% 50%";}else if(+slot.dataset.i===6){const facePositions=["50% 38%"];im.style.objectPosition=facePositions[j]||"50% 50%";}t.appendChild(im);}
+    else{const sp=document.createElement("span");sp.textContent="foto";t.appendChild(sp);}
+    bindThumb(t);more.appendChild(t);
+  }
+  ov.scrollTop=0;ov.hidden=false;void ov.offsetWidth;ov.classList.add("on");
+  slot.style.visibility="hidden";
+  card.animate([{transform:from(slot)},{transform:"rotate(0deg)"}],{duration:T,easing:EASE});
+  info.animate([{opacity:0,transform:"translateX(48px)"},{opacity:0,transform:"translateX(48px)",offset:.4},{opacity:1,transform:"none"}],{duration:T*1.3,easing:EASE});
+  more.animate([{opacity:0,transform:"translateY(40px)"},{opacity:0,transform:"translateY(40px)",offset:.5},{opacity:1,transform:"none"}],{duration:T*1.5,easing:EASE});
+  $("x").focus({preventScroll:true});
+}
+const CITY_MAPS={
+  "Studená":"img/asset-108.webp",
+  "Teplice":"img/asset-109.webp",
+  "Kaplice":"img/asset-110.webp",
+  "Havlíčkův Brod":"img/asset-111.webp",
+  "Ostrava":"img/asset-112.webp",
+  "Troubky":"img/asset-113.webp",
+  "Zlín":"img/asset-114.webp"
+};
+function openCity(button){
+  if(busy)return;
+  const city=button.textContent.trim(), panel=button.parentElement.querySelector(":scope > .cat-body");
+  if(!panel)return;
+  cur=button;[card,info,more].forEach(e=>e.getAnimations().forEach(a=>a.cancel()));
+  card.classList.add("city-card");
+  card.innerHTML="<span class=\"city-cover\" aria-hidden=\"true\"></span><b class=\"cap\"></b>";
+  const cityCover=card.querySelector(".city-cover");
+  cityCover.textContent="";
+  const mapSrc=CITY_MAPS[city];
+  if(mapSrc){const mapImg=document.createElement("img");mapImg.src=mapSrc;mapImg.alt="Mapa města "+city;mapImg.loading="eager";cityCover.append(mapImg);}
+  info.classList.add("city-info");more.classList.add("city-more");more.innerHTML=panel.innerHTML;
+  more.querySelectorAll(".cat.open").forEach(c=>c.classList.remove("open"));
+  more.querySelectorAll(".cat-h").forEach(b=>b.setAttribute("aria-expanded","false"));
+  $("n").textContent=city;$("r").textContent="";$("b").textContent="Fotografie a vzpomínky z tohoto města.";
+  
+
+  more.querySelectorAll(".thumb").forEach(bindThumb);
+  ov.setAttribute("aria-label","Akce města "+city);ov.scrollTop=0;ov.hidden=false;void ov.offsetWidth;ov.classList.add("on");button.style.visibility="hidden";
+  card.animate([{transform:from(button)},{transform:"rotate(0deg)"}],{duration:T,easing:EASE});
+  info.animate([{opacity:0,transform:"translateX(48px)"},{opacity:0,transform:"translateX(48px)",offset:.4},{opacity:1,transform:"none"}],{duration:T*1.3,easing:EASE});
+  more.animate([{opacity:0,transform:"translateY(40px)"},{opacity:0,transform:"translateY(40px)",offset:.5},{opacity:1,transform:"none"}],{duration:T*1.5,easing:EASE});
+  $("x").focus({preventScroll:true});
+}
+function closeIt(){
+  if(!cur||busy)return;busy=true;const slot=cur;
+  info.animate([{opacity:1},{opacity:0,transform:"translateX(32px)"}],{duration:T*.5,fill:"forwards"});
+  more.animate([{opacity:1},{opacity:0,transform:"translateY(24px)"}],{duration:T*.5,fill:"forwards"});
+  ov.classList.remove("on");
+  card.animate([{transform:"rotate(0deg)"},{transform:from(slot)}],{duration:T,easing:EASE,fill:"forwards"}).onfinish=()=>{
+    ov.hidden=true;card.classList.remove("city-card");info.classList.remove("city-info");more.classList.remove("city-more");ov.setAttribute("aria-label","Detail člověka");slot.style.visibility="";slot.focus({preventScroll:true});cur=null;busy=false;
+    [card,info,more].forEach(e=>e.getAnimations().forEach(a=>a.cancel()));
+  };
+  if(!T){ov.hidden=true;slot.style.visibility="";cur=null;busy=false;}
+}
+document.querySelectorAll(".gallery .slot").forEach(s=>{
+  s.addEventListener("click",()=>openIt(s));
+  s.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openIt(s);}});
+});
+$("x").addEventListener("click",closeIt);
+ov.addEventListener("click",e=>{if(e.target===ov||e.target.classList.contains("stage"))closeIt();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(lbSrc)lbClose();else closeIt();}});
+const lb=$("lb"),lbc=$("lbc");let lbSrc=null,lbBusy=false;
+function lbFrom(t){const a=t.getBoundingClientRect(),b=lbc.getBoundingClientRect();return "translate("+(a.left+a.width/2-b.left-b.width/2)+"px,"+(a.top+a.height/2-b.top-b.height/2)+"px) scale("+(a.width/b.width)+") rotate(0deg)";}
+function lbOpen(t){
+  if(lbBusy||lbSrc)return;lbSrc=t;
+  lbc.getAnimations().forEach(a=>a.cancel());
+  lbc.innerHTML=t.innerHTML;
+  const sp=t.querySelector("span"),cs=lbc.querySelector("span");
+  if(sp&&cs)cs.style.backgroundImage=getComputedStyle(sp).backgroundImage;
+  lb.hidden=false;void lb.offsetWidth;lb.classList.add("on");
+  t.style.visibility="hidden";
+  lbc.animate([{transform:lbFrom(t)},{transform:"rotate(0deg)"}],{duration:T,easing:EASE});
+}
+function bindThumb(t){
+  t.addEventListener("click",()=>lbOpen(t));
+  t.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();lbOpen(t);}});
+}
+function lbClose(){
+  if(!lbSrc||lbBusy)return;lbBusy=true;const t=lbSrc;lb.classList.remove("on");
+  const done=()=>{lb.hidden=true;t.style.visibility="";lbc.getAnimations().forEach(a=>a.cancel());lbSrc=null;lbBusy=false;};
+  if(!T){done();return;}
+  lbc.animate([{transform:"rotate(0deg)"},{transform:lbFrom(t)}],{duration:T,easing:EASE,fill:"forwards"}).onfinish=done;
+}
+document.querySelectorAll(".thumb").forEach(t=>{
+  t.addEventListener("click",()=>lbOpen(t));
+  t.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();lbOpen(t);}});
+});
+lb.addEventListener("click",lbClose);
+document.addEventListener("click",e=>{const b=e.target.closest(".cat-h");if(!b)return;const c=b.parentElement;if(c.matches("#c2 > .cat-body > .cat-in.subs > .cat.sub")){openCity(b);return;}const o=!c.classList.contains("open");c.classList.toggle("open",o);b.setAttribute("aria-expanded",String(o));});
+
+</script>
+</body>
+</html>
